@@ -15,9 +15,10 @@ public class BankAccountTest {
         account = new BankAccount();
     }
 
+    @Test
     void constructorInitialisation()
     {
-        account = new BankAccount("ACC1235", "Seth", 100);
+        account = new BankAccount("ACC12345", "Seth", 100);
         assertEquals("ACC12345", account.getAccNo());
         assertEquals("Seth", account.getName());
         assertEquals(100, account.getBalance());
@@ -27,6 +28,16 @@ public class BankAccountTest {
     void constructorNegativeInitialisation()
     {
         Exception ex = assertThrows(IllegalArgumentException.class, () -> new BankAccount("ACC12345", "Seth", -100));
-        assertEquals("Ballance cant be lower than 0", ex.getMessage());
+        assertEquals("Balance must be greater than 0", ex.getMessage());
+    }
+
+    @Test
+    void depositSuccessful() { assertEquals(200, account.deposit(100)); }
+
+    @Test
+    void depositFail()
+    {
+        Exception ex = assertThrows(IllegalArgumentException.class, () -> account.deposit(-100));
+        assertEquals("Balance must be greater than 0", ex.getMessage());
     }
 }
