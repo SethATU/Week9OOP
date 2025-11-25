@@ -41,4 +41,13 @@ public class BankAccountTest {
         assertEquals("Balance must be greater than 0", ex.getMessage());
     }
 
+    @Test
+    void withdrawSuccessful() { assertEquals(50, account.withdraw(50)); }
+
+    @Test
+    void withdrawFail()
+    {
+        Exception ex = assertThrows(IllegalArgumentException.class, () -> account.deposit(-100));
+        assertEquals("Balance must be greater than 0", ex.getMessage());
+    }
 }

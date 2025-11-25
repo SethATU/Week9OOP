@@ -41,4 +41,14 @@ public class BankAccount {
         }
         return balance;
     }
+
+    public double withdraw(double withdrawAmount)
+    {
+        balance = balance - withdrawAmount;
+        if (withdrawAmount < 0)
+        {
+            throw new IllegalArgumentException("Balance must be greater than 0");
+        }
+        return balance;
+    }
 }
